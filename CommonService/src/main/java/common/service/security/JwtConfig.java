@@ -1,9 +1,15 @@
-package com.gateway.security;
+package common.service.security;
 
 import org.springframework.beans.factory.annotation.Value;
 
-// TODO add component
+import lombok.Getter;
+import lombok.ToString;
+
+@Getter // lombok will create getters auto.
+@ToString
 public class JwtConfig {
+	// Spring doesn't inject/autowire to "static" fields.
+	// Link: https://stackoverflow.com/a/6897406
 	@Value("${security.jwt.uri:/auth/**}")
 	private String Uri;
 
@@ -19,44 +25,24 @@ public class JwtConfig {
 	@Value("${security.jwt.secret:JwtSecretKey}")
 	private String secret;
 
+	// In case you want to use plain getters instead of lombok.
 	public String getUri() {
 		return Uri;
-	}
-
-	public void setUri(String uri) {
-		Uri = uri;
 	}
 
 	public String getHeader() {
 		return header;
 	}
 
-	public void setHeader(String header) {
-		this.header = header;
-	}
-
 	public String getPrefix() {
 		return prefix;
-	}
-
-	public void setPrefix(String prefix) {
-		this.prefix = prefix;
 	}
 
 	public int getExpiration() {
 		return expiration;
 	}
 
-	public void setExpiration(int expiration) {
-		this.expiration = expiration;
-	}
-
 	public String getSecret() {
 		return secret;
 	}
-
-	public void setSecret(String secret) {
-		this.secret = secret;
-	}
-
 }
